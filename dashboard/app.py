@@ -1,4 +1,6 @@
 import streamlit as st
+import plotly.express as px
+import pandas as pd
 
 # Configuration de la page (WCAG 2.4.2 : titre de page)
 st.set_page_config(
@@ -32,7 +34,56 @@ if page == "Accueil":
 # Page Données
 elif page == "Données (EDA)":
     st.title("Analyse exploratoire des données")
-    st.info("Cette section présentera les tableaux et graphiques interactifs.")
+    st.write(
+        """
+        Cette section présente un aperçu du jeu de données utilisé pour le projet.
+        Les données correspondent à des tweets non vectorisés, utilisés en en entrée du pipeline de classification.
+        """
+    )
+
+    # Chargement des données
+    @st.cache_data
+    def load_data():
+        return pd.read_parquet(
+            "data/raw/tweets_16k.parquet"
+        )
+
+    df = load_data()
+    
+    label_mapping = {0: "Négatif", 4: "Positif"}
+    df["sentiment"] = df["label"].map(label_mapping)
+
+    #Informations générales
+    st.subheader("Aperçu du jeu de données")
+    st.write(f"Nombre de lignes : {df.shape[0]}")
+    st.write(f"Nombre de colonnes : {df.shape[1]}")
+
+    st.subheader("Répartition des classes")
+
+    class_counts = df["label"].value_counts().sort_index()
+    st.write(class_counts)
+
+    st.dataframe(df.head(20))
+
+    # Graphique simple : longueur des tweets
+    st.subheader("Distribution de la longueur des tweets")
+
+    df["tweet_length"] = df["text"].astype(str).str.len()
+
+    fig = px.histogram(
+        df,
+        x="tweet_length",
+        nbins=50,
+        labels={"tweet_length": "Nombre de caractères"},
+        title="Distribution de la longueur des tweets"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.caption(
+        "Ce graphique permet de visualiser la variabilité de la longueur des tweets, "
+        "information utile pour le choix des modèles et des stratégies de prétraitement."
+    )
 
 # Page Prédiction
 elif page == "Prédire":
