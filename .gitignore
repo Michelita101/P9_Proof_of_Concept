@@ -1,0 +1,29 @@
+# Environnements
+.env
+.venv
+env/
+__pycache__/
+*.pyc
+
+# Données
+data/
+*.csv
+*.parquet
+
+# Modèles
+models/
+*.pkl
+*.joblib
+*.pt
+*.h5
+*.keras
+
+# Streamlit
+.streamlit/
+
+# Logs
+*.log
+
+# OS / divers
+.DS_Store
+
