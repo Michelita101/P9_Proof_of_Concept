@@ -13,10 +13,10 @@ st.set_page_config(
 # Chargement du modèle DeBERTa-v3
 @st.cache_resource
 def load_model():
-    model_path = "models/deberta"
+    model_name = "Michelita/deberta-p9-sentiment"
 
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModelForSequenceClassification.from_pretrained(model_path)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
     device = torch.device("cpu")
     model.to(device)
