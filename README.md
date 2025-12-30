@@ -104,6 +104,7 @@ sans objectif de mise en production industrielle.
 ```bash
 pip install -r requirements.txt
 streamlit run dashboard/app.py
+```
 
 ---
 
