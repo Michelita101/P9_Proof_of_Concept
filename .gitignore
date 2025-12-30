@@ -15,9 +15,14 @@ env/
 # OS / divers
 .DS_Store
 
+# Modèles
+models/
+*.safetensors
+
 # Documents pédagogiques (hors code)
 note_methodologique/
 plan_previsionnel/
+*.png
 
 # Streamlit
 .streamlit/
