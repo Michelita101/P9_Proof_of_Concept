@@ -110,5 +110,5 @@ streamlit run dashboard/app.py
 
 ## 📝 Auteur
 
-Projet réalisé par **Michèle Dewerpe**
+Projet réalisé par **Michèle Dewerpe**  
 Dans le cadre du parcours *Ingénieur IA – OpenClassrooms*
